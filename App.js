@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {SafeAreaView, Text, StyleSheet, Pressable} from 'react-native';
+import Form from './src/components/Form';
 
 const App = () => {
-  console.log('Antes del componente');
+  
+  const [modal, setModal] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Appointments Manager</Text>
+      <Text style={styles.title}>Clients Manager</Text>
       <Pressable
         style={styles.btnNew}
         onPress={() => {
-          console.log('presionando');
+         setModal(true)
         }}>
-        <Text style={styles.btnText}>New Event</Text>
+        <Text style={styles.btnText}>+ New Appointment</Text>
       </Pressable>
+      <Form modal={modal}/>
     </SafeAreaView>
   );
 };
@@ -29,12 +33,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 10,
     fontWeight: '600',
-    letterSpacing: 1,
   },
 
   btnNew: {
-    backgroundColor:"#EB6440",
-    padding: 10,
+    backgroundColor:"#AAC4FF",
+    padding: 15,
     marginTop: 30,
    marginHorizontal:40,
   borderRadius: 10
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
 
   btnText: {
     textAlign:"center",
-    fontSize:15,
+    fontSize:18,
     color: "#FFF",
     textTransform:"uppercase",
     fontWeight:"900",
