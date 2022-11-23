@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   Modal,
@@ -10,12 +10,22 @@ import {
 } from 'react-native';
 
 const Form = ({modal}) => {
+
+  const [customerData, setCustomerData] = useState({
+    name:"",
+    company:"",
+    email:"",  
+    phone:"",
+    comments:""
+  })
+
+  const { name, company,email, phone, comments  } = customerData;
+
+
   return (
     <Modal animationType="fade" visible={modal}>
       <SafeAreaView style={styles.content}>
         <ScrollView>
-
-
         <Text style={styles.title}>
           New <Text>Appointment</Text>
         </Text>
@@ -24,7 +34,8 @@ const Form = ({modal}) => {
           <TextInput 
             style={styles.input}
             placeholder="Client name" 
-
+            value={name}
+            onTextChange={setCustomerData}
           />
         </View>
         <View style={styles.field}>
@@ -32,7 +43,8 @@ const Form = ({modal}) => {
           <TextInput 
             style={styles.input}
             placeholder="Company name" 
-
+            value={company}
+            onTextChange={setCustomerData}
           />
         </View>
         <View style={styles.field}>
@@ -41,7 +53,8 @@ const Form = ({modal}) => {
             style={styles.input}
             placeholder="example@customer.com" 
             keyboardType='email-address'
-
+            value={email}
+            onTextChange={setCustomerData}
           />
         </View>
         <View style={styles.field}>
@@ -50,7 +63,8 @@ const Form = ({modal}) => {
             style={styles.input}
             placeholder="+555 555 555" 
             keyboardType='number-pad'
-
+            value={phone}
+            onTextChange={setCustomerData}
           />
         </View>
         <View style={styles.field}>
@@ -58,7 +72,10 @@ const Form = ({modal}) => {
           <TextInput 
             style={styles.input}
             placeholder="Any comment about the meeting..." 
-
+            multiline={true}
+            numberOfLines={4}
+            value={comments}
+            onTextChange={setCustomerData}
           />
         </View>
         </ScrollView>
@@ -69,7 +86,7 @@ const Form = ({modal}) => {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: '#AAC4FF',
+    backgroundColor: '#8D9EFF',
     flex: 1,
   },
 

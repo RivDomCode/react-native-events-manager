@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 
   btnNew: {
-    backgroundColor:"#AAC4FF",
+    backgroundColor:"#8D9EFF",
     padding: 15,
     marginTop: 30,
    marginHorizontal:40,
