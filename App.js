@@ -16,7 +16,7 @@ const App = () => {
         }}>
         <Text style={styles.btnText}>+ New Appointment</Text>
       </Pressable>
-      <Form modal={modal}/>
+      <Form modal={modal} setModal={setModal}/>
     </SafeAreaView>
   );
 };

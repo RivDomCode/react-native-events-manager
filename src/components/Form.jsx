@@ -7,9 +7,12 @@ import {
   View,
   TextInput,
   ScrollView,
+  Switch,
+  Pressable,
 } from 'react-native';
+import DatePicker from 'react-native-date-picker';
 
-const Form = ({modal}) => {
+const Form = ({modal, setModal}) => {
 
   const [customerData, setCustomerData] = useState({
     name:"",
@@ -21,6 +24,7 @@ const Form = ({modal}) => {
 
   const { name, company,email, phone, comments  } = customerData;
 
+  const [date, setDate] = useState(new Date())
 
   return (
     <Modal animationType="fade" visible={modal}>
@@ -29,6 +33,9 @@ const Form = ({modal}) => {
         <Text style={styles.title}>
           New <Text>Appointment</Text>
         </Text>
+        <Pressable style={styles.cancelBtn} onPress={( ) => setModal(false)}>
+          <Text  style={styles.cancelBtnText}>X Cancel</Text>
+        </Pressable>
         <View style={styles.field}>
           <Text style={styles.label}>Customer name:</Text>
           <TextInput 
@@ -68,6 +75,16 @@ const Form = ({modal}) => {
           />
         </View>
         <View style={styles.field}>
+          <Text style={styles.label}>Date:</Text>
+            <View style={styles.dateContainer}>
+            <DatePicker 
+                date={date}
+                onDateChange={(date)=>setDate(date)}
+              />
+            </View>
+
+        </View>
+        <View style={styles.field}>
           <Text style={styles.label}>Comments:</Text>
           <TextInput 
             style={styles.input}
@@ -102,6 +119,24 @@ const styles = StyleSheet.create({
   titleBold: {
     fontWeight: '900',
   },
+  
+  cancelBtn: {
+    marginTop:20,
+    backgroundColor:"#0D4C92",
+    marginHorizontal:30,
+    padding:15,
+    borderRadius:10,
+    borderWidth:1,
+    borderColor:"#fff"
+  },
+
+  cancelBtnText:{
+    color:"#fff",
+    textAlign:"center",
+    fontWeight:"900",
+    fontSize:20,
+    textTransform:"uppercase"
+  },
 
   field:{
     marginTop:40,
@@ -119,8 +154,13 @@ const styles = StyleSheet.create({
     backgroundColor:"#eee",
     borderRadius:10,
     padding:8,
-
+  },
+  dateContainer:{
+    backgroundColor:"#eee",
+    borderRadius:10,
   }
+
+
 });
 
 export default Form;
