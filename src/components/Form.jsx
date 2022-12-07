@@ -9,6 +9,7 @@ import {
   ScrollView,
   Switch,
   Pressable,
+  Alert,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
@@ -24,8 +25,17 @@ const Form = ({modal, setModal}) => {
 
   const { name, company,email, phone, comments  } = customerData;
 
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
+  const handleAppointment = () => {
+
+    if( [ name, company,email, phone, comments, date ].includes("")){
+      Alert.alert('Error', "All fields are required");
+      return
+    }
+
+   console.log("adios")
+  }
   return (
     <Modal animationType="fade" visible={modal}>
       <SafeAreaView style={styles.content}>
@@ -95,6 +105,9 @@ const Form = ({modal, setModal}) => {
             onTextChange={setCustomerData}
           />
         </View>
+        <Pressable style={styles.addBtn} onPress={handleAppointment}>
+          <Text  style={styles.addBtnText}>Add appointment</Text>
+        </Pressable>
         </ScrollView>
       </SafeAreaView>
     </Modal>
@@ -122,18 +135,16 @@ const styles = StyleSheet.create({
   
   cancelBtn: {
     marginTop:20,
-    backgroundColor:"#0D4C92",
+    backgroundColor:"#5A4FCF",
     marginHorizontal:30,
     padding:15,
     borderRadius:10,
-    borderWidth:1,
-    borderColor:"#fff"
   },
 
   cancelBtnText:{
-    color:"#fff",
+    color:"#fFF",
     textAlign:"center",
-    fontWeight:"900",
+    fontWeight:"700",
     fontSize:20,
     textTransform:"uppercase"
   },
@@ -155,11 +166,26 @@ const styles = StyleSheet.create({
     borderRadius:10,
     padding:8,
   },
+
   dateContainer:{
     backgroundColor:"#eee",
     borderRadius:10,
-  }
+  },
+  addBtn: {
+    backgroundColor:"#F59E0B",
+    marginHorizontal:30,
+    padding:15,
+    borderRadius:10,
+    marginVertical:50,
+  },
 
+  addBtnText:{
+    color:"#FFF",
+    textAlign:"center",
+    fontWeight:"700",
+    fontSize:20,
+    textTransform:"uppercase"
+  },
 
 });
 
