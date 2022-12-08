@@ -18,7 +18,9 @@ const App = () => {
         <Text style={styles.btnText}>+ New Appointment</Text>
       </Pressable>
 
-        {appointments.length === 0  ? <Text style={styles.noAppointments}>No appointments yet</Text> : <Text>yes</Text> 
+        {appointments.length === 0  ? 
+        <Text style={styles.noAppointments}>No appointments yet</Text> : 
+        <Text>yes</Text> 
         }
       <Form modal={modal} setModal={setModal} setAppointments={setAppointments} appointments={appointments}/>
     </SafeAreaView>
