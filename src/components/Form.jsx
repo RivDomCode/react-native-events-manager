@@ -13,17 +13,13 @@ import {
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
-const Form = ({modal, setModal}) => {
+const Form = ({modal, setModal, setAppointments, appointments}) => {
 
-  const [customerData, setCustomerData] = useState({
-    name:"",
-    company:"",
-    email:"",  
-    phone:"",
-    comments:""
-  })
-
-  const { name, company,email, phone, comments  } = customerData;
+const [name, setName] = useState("");
+const [company, setCompany] = useState("");
+const [email, setEmail] = useState("");
+const [phone, setPhone] = useState("");
+const [comments, setComments] = useState("");
 
   const [date, setDate] = useState(new Date());
 
@@ -34,7 +30,22 @@ const Form = ({modal, setModal}) => {
       return
     }
 
-   console.log("adios")
+    const newAppointment = {
+      name,
+      company,
+      email,  
+      phone,
+      comments,
+      date
+    }
+   setAppointments([, newAppointment, ...appointments]);
+   setName("");
+   setCompany("");
+   setEmail(""),
+   setPhone("");
+   setComments("");
+   setDate(new Date());
+   setModal(false)
   }
   return (
     <Modal animationType="fade" visible={modal}>
@@ -52,7 +63,7 @@ const Form = ({modal, setModal}) => {
             style={styles.input}
             placeholder="Client name" 
             value={name}
-            onTextChange={setCustomerData}
+            onChangeText={setName}
           />
         </View>
         <View style={styles.field}>
@@ -61,7 +72,7 @@ const Form = ({modal, setModal}) => {
             style={styles.input}
             placeholder="Company name" 
             value={company}
-            onTextChange={setCustomerData}
+            onChangeText={setCompany}
           />
         </View>
         <View style={styles.field}>
@@ -71,7 +82,7 @@ const Form = ({modal, setModal}) => {
             placeholder="example@customer.com" 
             keyboardType='email-address'
             value={email}
-            onTextChange={setCustomerData}
+            onChangeText={setEmail}
           />
         </View>
         <View style={styles.field}>
@@ -81,7 +92,7 @@ const Form = ({modal, setModal}) => {
             placeholder="+555 555 555" 
             keyboardType='number-pad'
             value={phone}
-            onTextChange={setCustomerData}
+            onChangeText={setPhone}
           />
         </View>
         <View style={styles.field}>
@@ -102,7 +113,7 @@ const Form = ({modal, setModal}) => {
             multiline={true}
             numberOfLines={4}
             value={comments}
-            onTextChange={setCustomerData}
+            onChangeText={setComments}
           />
         </View>
         <Pressable style={styles.addBtn} onPress={handleAppointment}>

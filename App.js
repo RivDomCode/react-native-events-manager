@@ -5,6 +5,7 @@ import Form from './src/components/Form';
 const App = () => {
   
   const [modal, setModal] = useState(false);
+  const [appointments, setAppointments] = useState([])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -16,7 +17,10 @@ const App = () => {
         }}>
         <Text style={styles.btnText}>+ New Appointment</Text>
       </Pressable>
-      <Form modal={modal} setModal={setModal}/>
+
+        {appointments.length === 0  ? <Text style={styles.noAppointments}>No appointments yet</Text> : <Text>yes</Text> 
+        }
+      <Form modal={modal} setModal={setModal} setAppointments={setAppointments} appointments={appointments}/>
     </SafeAreaView>
   );
 };
@@ -51,6 +55,13 @@ const styles = StyleSheet.create({
     fontWeight:"900",
     letterSpacing: 1
   },
+
+  noAppointments:{
+    marginTop:40,
+    textAlign:"center",
+    fontSize:20,
+    fontWeight:"900",
+  }
 });
 
 export default App;
